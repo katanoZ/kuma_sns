@@ -1,0 +1,24 @@
+<h2 class="page-header">パスワードの再発行</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+  <%if devise_error_messages!.present? %>
+    <div class="form-group alert alert-danger">
+      <div id="error_explanation">
+        <%= devise_error_messages! %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "パスワードの再発行", class: "btn btn-primary hidden-xs"%>
+    <%= f.submit "パスワードの再発行", class: "btn btn-primary btn-block visible-xs"%>
+  </div>
+<% end %>
+<br>
+<%= render "devise/shared/links" %>

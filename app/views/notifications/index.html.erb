@@ -1,0 +1,36 @@
+<h2 class="page-header">お知らせ</h2>
+<div class="text-center">
+  <% if @notifications.empty? %>
+    <br>
+    <p class="text-muted">新着の通知はありません。</p>
+  <% else %>
+    <% @notifications.each do |notification| %>
+      <% if notification.notification_type == "comment" %>
+        <div><span class="label label-info"><%= read_or_unread(notification.read) %></span></div>
+        <p>
+          <%= profile_img(notification.comment.user, size: :small) %>&nbsp;&nbsp;
+          <%= notification.comment.user.try(:name) %>さんが
+          あなたのトピック（<%= link_to "#{notification.comment.topic.title}", topic_path(notification.comment.topic, notification_id: notification.id) %>）にコメントしました。
+        </p>
+        <p><%= posted_time(notification.created_at) %></p>
+        <hr>
+      <% elsif notification.notification_type == "follow" %>
+        <div><span class="label label-info"><%= read_or_unread(notification.read) %></span></div>
+        <p>
+          <% other_user = User.find(notification.follower_id) %>
+          <%= profile_img(other_user, size: :small) %>&nbsp;&nbsp;
+          <%= link_to "#{other_user.try(:name)}", user_path(other_user, notification_id: notification.id) %>
+          さんがあなたをフォローしました。
+        </p>
+        <p><%= posted_time(notification.created_at) %></p>
+        <hr>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<section>
+    <div id="page-top-btn" class="page-top-btn">
+        <p><a class="move-page-top" id="move-page-top">▲</a></p>
+    </div>
+</section>

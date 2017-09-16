@@ -1,0 +1,17 @@
+<h2 class="page-header">ユーザ詳細</h2>
+<p><%= profile_img(@user, size: :medium) %></p>
+<div class="h4">ユーザ名：<%= @user.name %></div><br>
+<p class="h3">自己紹介</p>
+<% if @user.description.blank? %>
+  <p class="text-muted">設定されていません。</p>
+<% else %>
+  <p><%= @user.description %></p>
+<% end %>
+<br>
+<p><%= link_to "ユーザ一覧に戻る", users_path, class: "btn btn-default hidden-xs" %></p>
+<p><%= link_to "ユーザ一覧に戻る", users_path, class: "btn btn-default btn-block visible-xs" %></p>
+
+<hr>
+<%= render "followed_users", user:@user %><br>
+<hr>
+<%= render "followers", user:@user %><br>

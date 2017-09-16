@@ -1,0 +1,8 @@
+<%= form_for([topic,comment], remote: true) do |f| %>
+  <%= f.hidden_field :topic_id %>
+  <div class="field">
+    <%= f.text_field :content, placeholder: "コメントを入力", class: "form-control"  %>
+  </div>
+  <%= f.submit "コメントする", class: "btn btn-primary margin-top5px hidden-xs" %>
+  <%= f.submit "コメントする", class: "btn btn-primary margin-top5px btn-block visible-xs" %>
+<% end %>

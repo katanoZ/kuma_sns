@@ -1,0 +1,69 @@
+<% if notice %>
+  <div class="alert alert-success alert-dismissible">
+    <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p><%= notice %><%= alert %></p>
+  </div>
+<% end %>
+
+<% if @topics.blank?%>
+  <p class="margin-top100px"><%= image_tag("kuma_icon", class: "img-responsive center-block") %></p>
+  <p class="h4 text-center text-muted">ユーザをフォローするとトピックが表示されるよ！</p>
+  <p class="h4 text-center text-muted">ユーザのフォローは<%= link_to "こちら", users_path %>から</p>
+  <p class="h4 text-center text-muted">トピックの投稿は<%= link_to "こちら", new_topic_path %>から</p>
+<% else %>
+  <% @topics.each do |topic| %>
+    <div class="panel panel-default margin-top40px">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+            <%= profile_img(topic.user, size: :small) %>&nbsp;&nbsp;投稿者：<%= topic.user.name %>
+            <br class="visible-xs"><br class="visible-xs">
+            （<%= topic.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分%S秒") %>）
+        </h2>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong class="h3"><%= topic.title %></strong><hr>
+          <% if topic.flickr_url.present? %>
+            <img src="<%= topic.flickr_url %>" alt="<%= topic.title %>" class="img-responsive center-block"><br>
+          <% elsif topic.image.present? %>
+            <%= image_tag(topic.image, alt: topic.title, class: "img-responsive center-block") %><br>
+          <% end %>
+          <%= simple_format(h(topic.content)) %>
+        </p>
+      </div>
+      <div class="panel-footer">
+        <% if current_user == topic.user %>
+          <div class="hidden-xs clearfix">
+            <%= link_to "コメント機能", topic_path(topic.id), class: "btn btn-info pull-left" %>
+            &nbsp;<%= comment_outline(topic) %>
+            <%= link_to "投稿を削除する", topic_path(topic.id), method: :delete, data: { confirm: "本当に削除していいですか？" }, class: "btn btn-danger pull-right" %>
+            <span class="pull-right">&nbsp;</span>
+            <%= link_to "投稿を編集する", edit_topic_path(topic.id), class: "btn btn-success pull-right" %>
+          </div>
+          <div class="visible-xs">
+            <%= link_to "コメント機能", topic_path(topic.id), class: "btn btn-info btn-block" %>
+            <div class="text-center"><%= comment_outline(topic) %></div>
+            <%= link_to "投稿を編集する", edit_topic_path(topic.id), class: "btn btn-success btn-block" %>
+            <%= link_to "投稿を削除する", topic_path(topic.id), method: :delete, data: { confirm: "本当に削除していいですか？" }, class: "btn  btn-danger btn-block" %>
+          </div>
+        <% else %>
+          <div class="hidden-xs">
+            <%= link_to "コメント機能", topic_path(topic.id), class: "btn btn-info" %>
+            <%= comment_outline(topic) %>
+          </div>
+          <div class="visible-xs">
+            <%= link_to "コメント機能", topic_path(topic.id), class: "btn btn-info btn-block" %>
+            <div class="text-center"><%= comment_outline(topic) %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+<section>
+  <div id="page-top-btn" class="page-top-btn">
+      <p><a class="move-page-top" id="move-page-top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲</a></p>
+  </div>
+</section>

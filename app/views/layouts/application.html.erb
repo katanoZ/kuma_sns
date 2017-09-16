@@ -1,14 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>KumaSns</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>くまのいるSNS</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 
-  <body>
+  <% if user_signed_in? %>
+    <script>
+      var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
+        encrypted: true,
+        cluster: 'ap1'
+      });
+
+      var channel = pusher.subscribe("user_<%= current_user.id %>_channel");
+      channel.bind('notification_created', function(data) {
+        $('#unread_count').html(data.unread_counts);
+        if (data.unread_counts > 0){
+          $('#bell_color').css({"color": "orange"});
+        } else{
+          $('#bell_color').css({"color": "gray"});
+        };
+      });
+    </script>
+  <% end %>
+
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNav">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href=<%= root_path %> class="navbar-brand"><%= fa_icon("heart") %>  <strong>くまのいるSNS</strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="nav navbar-nav text-center">
+            <li><a href=<%= topics_path %>><%= fa_icon("newspaper-o lg", text: "トピック一覧") %></a></li>
+            <li><a href=<%= new_topic_path %>><%= fa_icon("pencil-square-o lg", text: "トピック投稿") %></a></li>
+            <li><a href=<%= users_path %>><%= fa_icon("users lg", text: "ユーザ一覧") %></a></li>
+            <li><a href=<%= conversations_path %>><%= fa_icon("comments lg", text: "メッセージ") %></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right text-center">
+            <% if user_signed_in? %>
+              <li><%= link_to 'マイページ', edit_user_registration_path %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li>
+                <%= link_to notifications_index_path do %>
+                  <% if @notifications_count > 0 %>
+                    <i id="bell_color" class="fa fa-bell fa-lg fa_orange"><span id="unread_count"><%= @notifications_count %></span></i>
+                  <% else %>
+                    <i id="bell_color" class="fa fa-bell fa-lg fa_gray"><span id="unread_count"><%= @notifications_count %></span></i>
+                  <% end %>
+                <% end %>
+              </li>
+            <% else %>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+              <li><%= link_to "アカウント登録", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      <div>
+    </nav>
+  </header>
+
+  <div class="container">
     <%= yield %>
-  </body>
+  </div>
+  <br>
+  <br>
+  <br>
+  <footer class="text-muted text-center">
+    <p>©2017 <i class="fa fa-heart"></i><em> くまのいるSNS</em></p>
+  </footer>
+</body>
 </html>

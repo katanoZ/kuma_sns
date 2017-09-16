@@ -1,0 +1,5 @@
+<p><%= @email %>さん、facebookumaにようこそ！</p>
+<br>
+<p>下のリンクからアカウントを登録できます。</p>
+<br>
+<p><%= link_to "アカウントを登録", confirmation_url(@resource, confirmation_token: @token) %></p>

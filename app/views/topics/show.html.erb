@@ -1,0 +1,46 @@
+<% if notice %>
+  <div class="alert alert-success alert-dismissible">
+    <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p><%= notice %><%= alert %></p>
+  </div>
+<% end %>
+
+<div class="panel panel-default margin-top40px">
+  <div class="panel-heading">
+    <h2 class="panel-title">
+        <%= profile_img(@topic.user, size: :small) %>&nbsp;&nbsp;投稿者：<%= @topic.user.name %>
+        <br class="visible-xs"><br class="visible-xs">
+        （<%= @topic.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分%S秒") %>）
+    </h2>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong class="h3"><%= @topic.title %></strong><hr>
+      <% if @topic.flickr_url.present? %>
+        <img src="<%= @topic.flickr_url %>" alt="<%= @topic.title %>" class="img-responsive center-block"><br>
+      <% elsif @topic.image.present? %>
+        <%= image_tag(@topic.image, alt: @topic.title, class: "img-responsive center-block") %><br>
+      <% end %>
+      <%= simple_format(h(@topic.content)) %>
+    </p>
+  </div>
+  <div class="panel-footer">
+    <p class="h3">コメント一覧</p>
+    <div id="comments_area">
+      <%= render partial: 'comments/index', locals: { comments: @comments, topic: @topic } %>
+    </div>
+    <%= render partial: 'comments/form', locals: { comment: @comment, topic: @topic } %>
+    <p class="h4 margin-top15px">
+      <% if current_user.id == @topic.user_id %>
+        <%= link_to 'トピック編集', edit_topic_path(@topic) %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <% end %>
+      <%= link_to '一覧に戻る', topics_path %>
+    </p>
+  </div>
+</div>
+
+<section>
+  <div id="page-top-btn" class="page-top-btn">
+      <p><a class="move-page-top" id="move-page-top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲</a></p>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<div class="clearfix">
+  <h3><%= @user.name %> のフォロワー</h3>
+  <% users = @user.followers %>
+  <% if users.empty? %>
+    <p class="text-muted">現在フォロワーはいません</p><br>
+  <% else %>
+    <% users.each do |user| %>
+      <div class="container-child col-md-3 col-sm-4 col-xs-6 img-margin">
+        <%= profile_img(user, size: :small) %><br>
+        <%= user.name %><br>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,44 @@
+<% if notice %>
+  <div class="alert alert-info alert-dismissible">
+    <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p><%= notice %><%= alert %></p>
+  </div>
+<% end %>
+
+<p>くまの話題を投稿してね！ʕ•ᴥ•ʔ</p><br>
+<%= form_for(@topic) do |f| %>
+  <% if @topic.errors.any? %>
+    <div class="form-group alert alert-danger">
+      <div id="error_explanation">
+        <h2><%= @topic.errors.count %>件のエラーがあります。</h2>
+        <ul>
+          <% @topic.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control", rows: 8 %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= image_tag(@topic.image.url, class: "max100") if @topic.image? %><br>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <br>
+  <%= f.submit "投稿する", class: "btn btn-primary hidden-xs"%>
+  <%= f.submit "投稿する", class: "btn btn-primary btn-block visible-xs"%>
+<% end %>
+<br>
+<p class="h4 margin-top15px">
+  <%= link_to "トピック一覧画面に戻る", topics_path %>
+</p>

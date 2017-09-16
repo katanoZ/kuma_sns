@@ -1,0 +1,28 @@
+<% if notice %>
+  <div class="alert alert-info alert-dismissible">
+    <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p><%= notice %><%= alert %></p>
+  </div>
+<% end %>
+
+<div class="well">
+  <div class="row">
+      <div class="col-xs-12 col-sm-6">
+          <img src="<%= asset_path "kumatop" %>" class="img-responsive img-rounded">
+      </div>
+      <div class="col-xs-12 col-sm-6">
+          <h1 class="top-h1 text-center">
+              <div class="hidden-xs hidden-sm top-margin01"></div>
+              <div class="vislble-sm top-margin02"></div>
+              <%= fa_icon("heart lg") %><strong><em> くまのいる SNS</em></strong><br>
+              <br>
+              <small>くまとヒトをつなぐSNSです。</small>
+          </h1>
+      </div>
+  </div>
+</div>
+<div class="top-margin03  text-center">
+    <p><strong>くま</strong>もヒトも皆で交流できるSNSです。</p>
+    <p>SNSの中には<strong>くまの話題</strong>があふれています。</p>
+    <p>（実は<strong>くまの話題</strong>しかありません。）</p>
+</div>
