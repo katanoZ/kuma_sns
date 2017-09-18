@@ -5,6 +5,7 @@
     <div class="margin-top5px"><%= render "follow_form", user:user %></div>
     <% unless user.id == current_user.id %>
       <div class="margin-top5px h4"><%= link_to "メッセージ", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></div>
+      <div class="margin-top5px h4"><%= link_to "チャット", chats_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></div>
     <% end %>
     <br>
 </div>

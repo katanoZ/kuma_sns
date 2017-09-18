@@ -3,6 +3,7 @@ class TalkBroadcastJob < ApplicationJob
 
   def perform(talk)
     ActionCable.server.broadcast 'chat_channel', talk: render_message(talk)
+    #ChatChannel.broadcast_to(talk.reciever, talk: render_message(talk))
   end
 
   private

@@ -9,7 +9,9 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
     $('#talks').append data['talk']
 
   speak: (talk) ->
-    @perform 'speak', talk: talk
+    user_id = document.forms.id_talk_form.id_user.value
+    chat_id = document.forms.id_talk_form.id_chat.value
+    @perform 'speak', talk: talk, user_id: user_id, chat_id: chat_id
 
 $(document).on 'keypress', '[data-behavior~=chat_speaker]', (event) ->
   if event.keyCode is 13 # return = send

@@ -1,3 +1,5 @@
 <div class="talk">
-  <p><%= talk.content %></p>
+  <% if talk.present? %>
+    <p><%= "#{talk.user.name}: #{talk.content}" %></p>
+  <% end %>
 </div>

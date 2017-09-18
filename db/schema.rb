@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918091513) do
+ActiveRecord::Schema.define(version: 20170918135606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chats", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
@@ -54,7 +61,6 @@ ActiveRecord::Schema.define(version: 20170918091513) do
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "content"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -85,6 +91,11 @@ ActiveRecord::Schema.define(version: 20170918091513) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "chat_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.index ["chat_id"], name: "index_talks_on_chat_id"
+    t.index ["user_id"], name: "index_talks_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -133,4 +144,6 @@ ActiveRecord::Schema.define(version: 20170918091513) do
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "users"
+  add_foreign_key "talks", "chats"
+  add_foreign_key "talks", "users"
 end
