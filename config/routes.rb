@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  
   get 'notifications/index'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :talks, only: [:show]
 
   resources :conversations do
     resources :messages
