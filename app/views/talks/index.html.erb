@@ -1,7 +1,7 @@
 <h2 class="page-header"><%= @chat.target_user(current_user).name %>さんとチャット</h2>
 
 <% if @old.present? %>
-  <p class="text-muted">（20件より前のメッセージは表示を省略）</p>
+  <p class="text-muted">（20件より前のメッセージは表示が省略されています。）</p>
 <% end %>
 
 <div id="talks", data-chat_id="<%= @chat.id %>">

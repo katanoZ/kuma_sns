@@ -90,6 +90,10 @@ class User < ApplicationRecord
     relationships.find_by(followed_id: other_user.id)
   end
 
+  def follow_each_other?(other_user)
+    self.following?(other_user) && other_user.following?(self)
+  end
+
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
   end

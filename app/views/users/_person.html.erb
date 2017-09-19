@@ -3,9 +3,10 @@
     <div class="h4"><%= user.name %></div>
     <div><%= link_to "ユーザ詳細", user_path(user), class: "btn btn-default" %></div>
     <div class="margin-top5px"><%= render "follow_form", user:user %></div>
-    <% unless user.id == current_user.id %>
-      <div class="margin-top5px h4"><%= link_to "メッセージ", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></div>
-      <div class="margin-top5px h4"><%= link_to "チャット", chats_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></div>
+    <% if user.id != current_user.id && user.follow_each_other?(current_user) %>
+      <div class="margin-top5px h4"><%= link_to "チャットをする", chats_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></div>
+    <% else %>
+      <div class="margin-top5px h4">&nbsp;</div>
     <% end %>
     <br>
 </div>
