@@ -4,7 +4,6 @@ class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :messages, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -111,16 +110,6 @@ class User < ApplicationRecord
     Pusher.trigger("user_#{comment.topic.user_id}_channel", 'notification_created', {
       unread_counts: Notification.where(user_id: comment.topic.user_id, read: false).count
     })
-  end
-
-  def create_kuma_message(recipient)
-    if Conversation.between(self.id, recipient.id).present?
-      conversation = Conversation.between(self.id, recipient.id).first
-    else
-      conversation = Conversation.create({sender_id: self.id, recipient_id: recipient.id})
-    end
-    message = conversation.messages.build({body: kuma_content, user_id: self.id})
-    message.save
   end
 
   def get_kuma_content
