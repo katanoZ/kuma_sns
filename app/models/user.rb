@@ -122,4 +122,8 @@ class User < ApplicationRecord
     message = conversation.messages.build({body: kuma_content, user_id: self.id})
     message.save
   end
+
+  def get_kuma_content
+    kuma_content
+  end
 end

@@ -11,7 +11,6 @@ jQuery(document).on 'turbolinks:load', ->
         chat_id = document.forms.id_talk_form.id_chat.value
         @perform 'speak', talk: talk, user_id: user_id, chat_id: chat_id
 
-  $(document).off 'keypress'
   $(document).on 'keypress', '[data-behavior~=chat_speaker]', (event) ->
     if event.keyCode is 13 # return = send
       App.chat.speak event.target.value
