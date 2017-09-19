@@ -2,8 +2,7 @@ class TalkBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(talk)
-    ActionCable.server.broadcast 'chat_channel', talk: render_message(talk)
-    #ChatChannel.broadcast_to(talk.reciever, talk: render_message(talk))
+    ActionCable.server.broadcast "chat_channel_#{talk.chat_id}", talk: render_message(talk)
   end
 
   private

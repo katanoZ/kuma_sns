@@ -1,5 +1,8 @@
 <div class="talk">
   <% if talk.present? %>
-    <p><%= "#{talk.user.name}: #{talk.content}" %></p>
+    <p class="left margin-top10px margin-bottom5px"><%= profile_img(talk.user, size: :small) %>
+      &nbsp;&nbsp;<b><%= talk.user.name %></b>（<%= talk.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分%S秒") %>）
+    </p>
+    <p>&nbsp;&nbsp;<%= talk.content %></p>
   <% end %>
 </div>

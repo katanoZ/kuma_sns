@@ -1,13 +1,25 @@
-<h1>Chat room aaa</h1>
+<h2 class="page-header"><%= @chat.target_user(current_user).name %>さんとチャット</h2>
 
-<div id="talks", data-room_id="<%= @chat.id %>">
+<% if @old.present? %>
+  <p class="text-muted">（20件より前のメッセージは表示を省略）</p>
+<% end %>
+
+<div id="talks", data-chat_id="<%= @chat.id %>">
   <%= render @talks %>
 </div>
 <div class="input">
   <form name="talk_form" id="id_talk_form">
-    <label>Say something:</label><br>
-    <input type="hidden" name="user" id="id_user" value="<%= current_user.id %>">
-    <input type="hidden" name="chat" id="id_chat" value="<%= @chat.id %>">
-    <input type="text" data-behavior="chat_speaker">
+    <div class="form-group">
+      <label>テキスト入力</label><br>
+      <input type="hidden" name="user" id="id_user" value="<%= current_user.id %>">
+      <input type="hidden" name="chat" id="id_chat" value="<%= @chat.id %>">
+      <input type="text" name="content" id="id_content" data-behavior="chat_speaker" class="form-control">
+    </div>
   </form>
 </div>
+
+<section>
+  <div id="page-top-btn" class="page-top-btn">
+      <p><a class="move-page-top" id="move-page-top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲</a></p>
+  </div>
+</section>
