@@ -43,7 +43,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   config.action_cable.allowed_request_origins = [ 'http://52.199.198.108/' ]
-  config.web_console.whitelisted_ips = 'crient-server-address'
+  #config.web_console.whitelisted_ips = 'crient-server-address'
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
