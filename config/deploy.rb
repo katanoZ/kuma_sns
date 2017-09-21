@@ -18,10 +18,6 @@ set :rbenv_type, :system
 
 set :log_level, :debug
 
-set :delayed_job_workers, 1
-set :delayed_job_roles, [:app]
-set :delayed_job_pid_dir, '/tmp'
-
 set :whenever_environment, "#{fetch(:stage)}"
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 SSHKit.config.command_map[:whenever] = "bundle exec whenever"
