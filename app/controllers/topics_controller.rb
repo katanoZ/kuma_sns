@@ -20,7 +20,6 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     if @topic.save
-      execute_kuma_comment_write(@topic)
       redirect_to topics_path, notice: "トピックを作成しました"
       NoticeMailer.sendmail_topic(@topic).deliver
     else
@@ -58,14 +57,5 @@ class TopicsController < ApplicationController
 
   def set_topic
     @topic = Topic.find(params[:id])
-  end
-
-  def execute_kuma_comment_write(topic)
-    kuma_followers = current_user.followers.find_all{|user| user.provider == "kuma_provider"}
-    return if kuma_followers.blank?
-    random = Random.new
-    kuma_followers.each do |kuma|
-      kuma.delay(run_at: random.rand(60).seconds.from_now).create_kuma_comment(topic)
-    end
   end
 end
