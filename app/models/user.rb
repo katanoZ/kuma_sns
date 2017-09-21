@@ -77,12 +77,12 @@ class User < ApplicationRecord
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)
 
-    return if self.provider != "kuma_provider"
-
-    Notification.create(user_id: other_user.id, follower_id: self.id, notification_type: "follow")
-    Pusher.trigger("user_#{other_user.id}_channel", 'notification_created', {
-      unread_counts: Notification.where(user_id: other_user.id, read: false).count
-    })
+    unless other_user.provider == "kuma_provider"
+      Notification.create(user_id: other_user.id, follower_id: self.id, notification_type: "follow")
+      Pusher.trigger("user_#{other_user.id}_channel", 'notification_created', {
+        unread_counts: Notification.where(user_id: other_user.id, read: false).count
+      })
+    end
   end
 
   def following?(other_user)
