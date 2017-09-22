@@ -6,7 +6,7 @@ class Topic < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validates :title, :content, presence: true
-  validates :content, format: {with: /[(くま)(クマ)(熊)(bear)(ぱんだ)(パンダ)(panda)]/, message: "には「くま」「クマ」「熊」などの語句を含めてください (ᵔᴥᵔ)"}
+  validates :content, format: {with: /くま|クマ|熊|bear|ぱんだ|パンダ|panda/, message: "には「くま」「クマ」「熊」などの語句を含めてください (ᵔᴥᵔ)"}
 
   after_create_commit do
     unless self.user.provider == "kuma_provider"
