@@ -30,6 +30,7 @@ module Kuma
   title = KUMA_TITLES01[random.rand(KUMA_TITLES01.length)] + KUMA_TITLES02[random.rand(KUMA_TITLES02.length)] + KUMA_TITLES03[random.rand(KUMA_TITLES03.length)]
   title.gsub!(/くま/, "ぱんだ")
   title.gsub!(/クマ/, "パンダ")
+  title.gsub!(/ベアー/, "パンダ")
   title.gsub!(/熊/, "大熊")
   title.gsub!(/KUMA/, "PANDA")
   title.gsub!(/BEAR/, "PANDA")
