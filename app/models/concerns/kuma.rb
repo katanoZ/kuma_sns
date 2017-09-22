@@ -1,5 +1,6 @@
 module Kuma
   require 'flickraw'
+  require 'yoshida'
 
   Dotenv.load
   FlickRaw.api_key = ENV["FLICKER_API_KEY"]
@@ -19,9 +20,21 @@ module Kuma
     return title
   end
 
+  def kuma_title_turezure
+    random = Random.new
+    title = Yoshida::Text.word + KUMA_TITLES03[random.rand(KUMA_TITLES03.length)]
+    return title
+  end
+
   def kuma_content
     random = Random.new
     content = KUMA_CONTENTS01[random.rand(KUMA_CONTENTS01.length)] + KUMA_CONTENTS02[random.rand(KUMA_CONTENTS02.length)] + KUMA_CONTENTS03[random.rand(KUMA_CONTENTS03.length)] + " " + KUMA_CONTENTS01[random.rand(KUMA_CONTENTS01.length)] + KUMA_CONTENTS02[random.rand(KUMA_CONTENTS02.length)] + KUMA_CONTENTS03[random.rand(KUMA_CONTENTS03.length)]
+    return content
+  end
+
+  def kuma_content_turezure
+    content = Yoshida::Text.sentences.join
+    content.gsub!(/。/, "くま。")
     return content
   end
 

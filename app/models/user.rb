@@ -98,11 +98,19 @@ class User < ApplicationRecord
   end
 
   def create_kuma_topic
-    Topic.create(user_id: self.id, title: kuma_title, content: kuma_content, flickr_url: kuma_image)
+    if name == "徒然熊"
+      Topic.create(user_id: self.id, title: kuma_title_turezure, content: kuma_content_turezure, flickr_url: kuma_image)
+    else
+      Topic.create(user_id: self.id, title: kuma_title, content: kuma_content, flickr_url: kuma_image)
+    end
   end
 
   def create_kuma_comment(topic)
-    comment = self.comments.build({topic_id: topic.id, content: kuma_content})
+    if name == "徒然熊"
+      comment = self.comments.build({topic_id: topic.id, content: kuma_content_turezure})
+    else
+      comment = self.comments.build({topic_id: topic.id, content: kuma_content})
+    end
     comment.save
 
     return if topic.user.provider == "kuma_provider"
@@ -113,6 +121,10 @@ class User < ApplicationRecord
   end
 
   def get_kuma_content
-    kuma_content
+    if name == "徒然熊"
+      kuma_content_turezure
+    else
+      kuma_content
+    end
   end
 end

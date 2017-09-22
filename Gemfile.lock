@@ -108,8 +108,6 @@ GEM
     erubi (1.6.1)
     excon (0.59.0)
     execjs (2.7.0)
-    faker (1.8.4)
-      i18n (~> 0.5)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -511,6 +509,7 @@ GEM
     xml-simple (1.1.5)
     xpath (2.1.0)
       nokogiri (~> 1.3)
+    yoshida (0.1.1)
 
 PLATFORMS
   ruby
@@ -529,7 +528,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-  faker
   flickraw
   fog
   font-awesome-rails
@@ -561,6 +559,7 @@ DEPENDENCIES
   unicorn
   web-console (>= 3.3.0)
   whenever
+  yoshida
 
 BUNDLED WITH
    1.15.4

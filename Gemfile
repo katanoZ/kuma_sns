@@ -62,7 +62,7 @@ gem 'unicorn'
 
 gem 'font-awesome-rails'
 
-gem "faker"
+gem "yoshida"
 
 gem "flickraw"
 

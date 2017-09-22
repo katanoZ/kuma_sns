@@ -10,7 +10,8 @@ kuma_array = [
   {name: "黒くま", email: "kurokuma@kuma.com", image: "kuma02.png", description: "黒くまです。動くものを追いかけるくまー。"},
   {name: "眠いくま", email: "nemuikuma@kuma.com", image: "kuma03.png", description: "おやすみなさい。"},
   {name: "目つきの悪いくま", email: "metukinowaruikuma@kuma.com", image: "kuma04.png", description: "目つきは悪いけどこころは優しいくまです。たぶん。"},
-  {name: "ジャイアントパンダ", email: "giantpanda@kuma.com", image: "kuma05.png", description: "竹食などの草食傾向が比較的強いが、機会があれば生肉食を拒まない。"},
+  {name: "徒然熊", email: "turezureguma@kuma.com", image: "kuma06.png", description: "つれづれなるままに、日暮らし、硯にむかひて、心にうつりゆくよしなしごとを、そこはかとなく書きつくれば、あやしうこそものぐるほしくま。"},
+  {name: "ジャイアントパンダ", email: "giantpanda@kuma.com", image: "kuma05.png", description: "竹食などの草食傾向が比較的強いが、機会があれば生肉食を拒まない。"}
 ]
 kuma_password = "kumapass"
 
