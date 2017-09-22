@@ -53,6 +53,7 @@ module Kuma
     content.gsub!(/く、くまー/, "パ、パンダー")
     content.gsub!(/くま/, "ぱんだ")
     content.gsub!(/クマ/, "パンダ")
+    content.gsub!(/シャケ/, "竹")
     return content
   end
 
