@@ -10,7 +10,7 @@
 <div class="input">
   <form name="talk_form" id="id_talk_form">
     <div class="form-group">
-      <label>テキスト入力</label><br>
+      <label>テキスト入力（改行で送信）</label><br>
       <input type="hidden" name="user" id="id_user" value="<%= current_user.id %>">
       <input type="hidden" name="chat" id="id_chat" value="<%= @chat.id %>">
       <input type="text" name="content" id="id_content" data-behavior="chat_speaker" class="form-control">
