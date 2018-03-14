@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
     user_ids = current_user.followed_users.ids
     user_ids << current_user.id
     @topics = Topic.where(user_id: user_ids).includes(:comments)
+                                            .page(params[:page])
+                                            .per(10)
   end
 
   def new

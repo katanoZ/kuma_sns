@@ -534,6 +534,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
+  kaminari
   letter_opener_web
   listen (>= 3.0.5, < 3.2)
   omniauth
@@ -562,4 +563,4 @@ DEPENDENCIES
   yoshida
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.3
