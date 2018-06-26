@@ -45,6 +45,7 @@ bundle install
 
 3. データベースを設定  
 ```
+rails db:create  
 rails db:migrate
 ```
 
